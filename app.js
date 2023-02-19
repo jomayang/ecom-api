@@ -27,9 +27,33 @@ app.post("/histories", async (req, res) => {
       `https://api.yalidine.app/v1/histories/${extension}`,
       {
         headers: {
-          "X-API-ID": "73837800271119345844",
+          "X-API-ID": "92129974643421801058",
           "X-API-TOKEN":
-            "W1CdymI0FqqBVDfGN1YfvWlK75v4oilX63ahP9TxFHh3rYTxGK8AAckdnnQHrBjb",
+            "JyWPYR7SpCZlWMSO4rQKcqrPAzNwmftAMdv49z07EVtwlTU3aBVNaFF2GLes2uoH",
+        },
+      }
+    );
+    res.status(200).json({ data: resp.data });
+  } catch (err) {
+    // Handle Error Here
+    console.error(err);
+    res.status(401).json({ error: err });
+  }
+});
+app.post("/delete", async (req, res) => {
+  try {
+    const tracking = req.body.tracking;
+    console.log(tracking);
+    const resp = await axios.delete(
+      `https://api.yalidine.app/v1/parcels/${tracking}`,
+      {
+        headers: {
+          // "X-API-ID": "73837800271119345844",
+          // "X-API-TOKEN":
+          //   "W1CdymI0FqqBVDfGN1YfvWlK75v4oilX63ahP9TxFHh3rYTxGK8AAckdnnQHrBjb",
+          "X-API-ID": "92129974643421801058",
+          "X-API-TOKEN":
+            "JyWPYR7SpCZlWMSO4rQKcqrPAzNwmftAMdv49z07EVtwlTU3aBVNaFF2GLes2uoH",
         },
       }
     );
@@ -48,9 +72,9 @@ app.post("/", async (req, res) => {
       `https://api.yalidine.app/v1/parcels/${extension}`,
       {
         headers: {
-          "X-API-ID": "73837800271119345844",
+          "X-API-ID": "92129974643421801058",
           "X-API-TOKEN":
-            "W1CdymI0FqqBVDfGN1YfvWlK75v4oilX63ahP9TxFHh3rYTxGK8AAckdnnQHrBjb",
+            "JyWPYR7SpCZlWMSO4rQKcqrPAzNwmftAMdv49z07EVtwlTU3aBVNaFF2GLes2uoH",
           // "X-API-ID": "92129974643421801058",
           // "X-API-TOKEN":
           //   "JyWPYR7SpCZlWMSO4rQKcqrPAzNwmftAMdv49z07EVtwlTU3aBVNaFF2GLes2uoH",
@@ -64,98 +88,6 @@ app.post("/", async (req, res) => {
     res.status(401).json({ error: err });
   }
 });
-// app.post("/create/", async (req, res) => {
-//   try {
-//     const firstName = req.body.firstName;
-//     const lastName = req.body.lastName;
-//     const address = req.body.address;
-//     const phone = req.body.phone;
-//     const wilaya = req.body.wilaya;
-//     const commune = req.body.commune;
-//     const product = req.body.product;
-//     const isStopDesk = req.body.isStopDesk;
-//     const isFreeShipping = req.body.isFreeShipping;
-//     const stopdesk = +req.body.stopdesk;
-//     const price = req.body.price;
-//     const url = "https://api.yalidine.app/v1/parcels/";
-
-//     const data = [
-//       {
-//         // order_id: "MyFirstOrder",
-//         // firstname: firstName,
-//         // familyname: lastName,
-//         // contact_phone: phone,
-//         // address: address,
-//         // to_commune_name: commune,
-//         // to_wilaya_name: wilaya,
-//         // product_list: product,
-//         // price: price,
-//         // is_stopdesk: isStopDesk,
-//         // freeshipping: true,
-//         // stopdesk_id: stopdesk,
-//         // has_exchange: false,
-//         // product_to_collect: null,
-//         // order_id: "MyFirstOrder",
-//         // firstname: "Brahim",
-//         // familyname: "Mohamed",
-//         // contact_phone: "0123456789",
-//         // address: "Cité Kaidi",
-//         // to_commune_name: "Bordj El Kiffan",
-//         // to_wilaya_name: "Alger",
-//         // product_list: "Presse à café",
-//         // price: 3000,
-//         // freeshipping: true,
-//         // is_stopdesk: true,
-//         // stopdesk_id: 163001,
-//         // has_exchange: 0,
-//         // product_to_collect: null,
-//         order_id: "MyFirstOrder",
-//         firstname: "samir",
-//         familyname: "bouaich",
-//         contact_phone: "0550887118",
-//         address: "ddd",
-//         to_commune_name: "Ouled Fayet",
-//         to_wilaya_name: "Alger",
-//         product_list: "productx",
-//         price: 4000,
-//         is_stopdesk: true,
-//         freeshipping: true,
-//         stopdesk_id: 164301,
-//         has_exchange: 0,
-//         product_to_collect: null,
-//       },
-//     ];
-//     console.log("the data: ", {
-//       order_id: "MyFirstOrder",
-//       firstname: firstName,
-//       familyname: lastName,
-//       contact_phone: phone,
-//       address: address,
-//       to_commune_name: commune,
-//       to_wilaya_name: wilaya,
-//       product_list: product,
-//       price: price,
-//       is_stopdesk: isStopDesk,
-//       freeshipping: true,
-//       stopdesk_id: stopdesk,
-//       has_exchange: false,
-//       product_to_collect: null,
-//     });
-//     const response = await axios.post(url, data, {
-//       headers: {
-//         "X-API-ID": "73837800271119345844",
-//         "X-API-TOKEN":
-//           "W1CdymI0FqqBVDfGN1YfvWlK75v4oilX63ahP9TxFHh3rYTxGK8AAckdnnQHrBjb",
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     res.status(200).json(response.data);
-//   } catch (err) {
-//     // Handle Error Here
-//     console.error(err);
-//     res.status(401).json({ erro: err });
-//   }
-// });
 
 app.post("/create", async (req, res) => {
   try {
@@ -209,9 +141,9 @@ app.post("/create", async (req, res) => {
 
     const response = await axios.post(url, data, {
       headers: {
-        "X-API-ID": "73837800271119345844",
+        "X-API-ID": "92129974643421801058",
         "X-API-TOKEN":
-          "W1CdymI0FqqBVDfGN1YfvWlK75v4oilX63ahP9TxFHh3rYTxGK8AAckdnnQHrBjb",
+          "JyWPYR7SpCZlWMSO4rQKcqrPAzNwmftAMdv49z07EVtwlTU3aBVNaFF2GLes2uoH",
         "Content-Type": "application/json",
       },
     });
