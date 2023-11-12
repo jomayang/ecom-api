@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
-app.use(cors());
+// app.use(cors());
 
 // app.get("/", (req, res) => {
 //   res.status(200).json({ message: "Get is not supported" });
@@ -134,6 +134,8 @@ app.post("/create", async (req, res) => {
         freeshipping: true,
         is_stopdesk: isStopDesk,
         stopdesk_id: stopdesk,
+        do_insurance: false,
+        declared_value: price > 5000 ? 5000 : price,
         has_exchange: 0,
         product_to_collect: null,
       },
@@ -151,6 +153,59 @@ app.post("/create", async (req, res) => {
     res.status(200).json(response.data);
   } catch (error) {
     console.error(error);
+    res.status(500).send(error.message);
+  }
+});
+
+app.get("/centers", async (req, res) => {
+  try {
+    // const firstName = req.body.firstName;
+    // const lastName = req.body.lastName;
+    // const address = req.body.address;
+    // const phone = req.body.phone;
+    // const wilaya = req.body.wilaya;
+    // const commune = req.body.commune;
+    // const product = req.body.product;
+    // const isStopDesk = req.body.isStopDesk;
+    // const isFreeShipping = req.body.isFreeShipping;
+    // const stopdesk = +req.body.stopdesk;
+    // const price = req.body.price;
+    // const orderId = req.body.orderId;
+    const url = "https://api.yalidine.app/v1/centers/?page_size=200";
+    const data = [
+      {
+        order_id: "order_13",
+        firstname: "مصباح",
+        familyname: "الواهم",
+        contact_phone: "0540842804",
+        address: "",
+        to_commune_name: "Skikda",
+        to_wilaya_name: "Skikda",
+        from_wilaya_name: "Constantine",
+        do_insurance: false,
+        declared_value: 0,
+        product_list: "chaussure_3_gris-souris_41x1",
+        price: 4900,
+        freeshipping: true,
+        is_stopdesk: true,
+        stopdesk_id: 213501,
+        has_exchange: 0,
+        product_to_collect: null,
+      },
+    ];
+
+    const response = await axios.get(url, {
+      headers: {
+        "X-API-ID": "92129974643421801058",
+        "X-API-TOKEN":
+          "JyWPYR7SpCZlWMSO4rQKcqrPAzNwmftAMdv49z07EVtwlTU3aBVNaFF2GLes2uoH",
+        "Content-Type": "application/json",
+      },
+    });
+
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send(error.message);
   }
 });
