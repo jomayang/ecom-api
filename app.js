@@ -135,7 +135,7 @@ app.post("/create", async (req, res) => {
         is_stopdesk: isStopDesk,
         stopdesk_id: stopdesk,
         do_insurance: false,
-        declared_value: price > 5000 ? 5000 : price,
+        declared_value: 5000,
         has_exchange: 0,
         product_to_collect: null,
       },
